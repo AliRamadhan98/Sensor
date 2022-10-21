@@ -47,8 +47,8 @@ void dhtPost(){
      if(WiFi.status()== WL_CONNECTED){
       String serverPath = addSuhu;
       client.begin(serverPath.c_str());
-      client.setAuthorization(bearer_token);      
-      // client.addHeader("Content-Type", "application/json");
+      client.setAuthorization(bearer_token); 
+      client.addHeader("Content-Type", "application/json");
       float h = dht.readHumidity();
       float t = dht.readTemperature();
       if (isnan(h) || isnan(t)) {
@@ -67,8 +67,8 @@ void dhtPost(){
       JsonObject object = doc.to<JsonObject>();
       object ["suhu"] = t;
       object ["kelembaban"] = h;      
-      object ["lat"] ="0" ;
-      object ["lon"] = "0";      
+      object ["lat"] ="100";
+      object ["lon"] ="200";      
 
       serializeJson(doc, jsonOutput);
       int httpCode = client.POST(String(jsonOutput));
